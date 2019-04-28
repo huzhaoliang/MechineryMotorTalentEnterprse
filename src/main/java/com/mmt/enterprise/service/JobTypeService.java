@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 
-import com.mmt.entity.JobType;
+import com.mmt.enterprise.entity.JobType;
 
 public interface JobTypeService {
 	JobType saveJobType(JobType jobType);

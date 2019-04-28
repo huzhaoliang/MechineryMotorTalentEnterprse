@@ -19,13 +19,13 @@ public class EnterpriseServiceImpl implements EnterpriseService{
 	private EnterpriseRepository enterpriseRepository;
 	
 	@Override
-	public EnterpriseUser getEnterpriseUserByName(String name){
-		return enterpriseRepository.getEnterpriseByName(name);
+	public EnterpriseUser getEnterpriseUserByEmail(String email){
+		return enterpriseRepository.getEnterpriseByEmail(email);
 	}
 
 	@Override
-	public EnterpriseUser getEnterpriseUserByNameAndPwd(String name, String password) {
-		return enterpriseRepository.getEnterpriseByNameAndPwd(name, password);
+	public EnterpriseUser getEnterpriseUserByEmailAndPwd(String email, String password) {
+		return enterpriseRepository.getEnterpriseByEmailAndPwd(email, password);
 	}
 
 }

@@ -4,7 +4,7 @@ import com.mmt.enterprise.entity.EnterpriseUser;
 
 public interface EnterpriseService {
 
-	public EnterpriseUser getEnterpriseUserByName(String name);
+	public EnterpriseUser getEnterpriseUserByEmail(String email);
 
-	public EnterpriseUser getEnterpriseUserByNameAndPwd(String name, String password);
+	public EnterpriseUser getEnterpriseUserByEmailAndPwd(String email, String password);
 }

@@ -19,11 +19,11 @@ public class MyUserDetailsService implements UserDetailsService {
 	private EnterpriseService enterpriseService;
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		System.out.println("登录用户为："+ username);
-		EnterpriseUser eUser = enterpriseService.getEnterpriseUserByName(username);
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		System.out.println("登录用户为："+ email);
+		EnterpriseUser eUser = enterpriseService.getEnterpriseUserByEmail(email);
 		if(null == eUser) {
-			throw new UsernameNotFoundException(username);
+			throw new UsernameNotFoundException(email);
 		}
 		List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 		System.out.println("登录用户为："+ eUser.getName());
