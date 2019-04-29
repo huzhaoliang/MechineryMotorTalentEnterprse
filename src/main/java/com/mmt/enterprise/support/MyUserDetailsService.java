@@ -22,6 +22,7 @@ public class MyUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		System.out.println("登录用户为："+ email);
 		EnterpriseUser eUser = enterpriseService.getEnterpriseUserByEmail(email);
+
 		if(null == eUser) {
 			throw new UsernameNotFoundException(email);
 		}

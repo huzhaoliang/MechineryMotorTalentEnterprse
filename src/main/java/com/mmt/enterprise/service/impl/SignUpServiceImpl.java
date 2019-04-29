@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.mmt.service.SignUpService;
+import com.mmt.enterprise.service.SignUpService;
 
 @Service(value="SignUpService")
 public class SignUpServiceImpl implements SignUpService

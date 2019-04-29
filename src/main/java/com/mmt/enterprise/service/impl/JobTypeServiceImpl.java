@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import com.mmt.entity.JobType;
-import com.mmt.repository.JobTypeRepository;
-import com.mmt.service.JobTypeService;
+import com.mmt.enterprise.entity.JobType;
+import com.mmt.enterprise.repository.JobTypeRepository;
+import com.mmt.enterprise.service.JobTypeService;
 
 public class JobTypeServiceImpl implements JobTypeService{
 	
