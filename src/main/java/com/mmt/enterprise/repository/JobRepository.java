@@ -13,9 +13,7 @@ import com.mmt.enterprise.entity.Job;
 public interface JobRepository extends JpaRepository<Job, Long>{
 	@Query(value="select a.* from job a where a.com_id=:companyId", nativeQuery = true)
 	List<Job> findJobsByCompanyId(@Param("companyId") Long companyId);
-	
-	@Modifying
-	@Transactional
-	@Query(value="delete from job where id=:id", nativeQuery = true)
-	void deleteJobById(@Param("id") Long id);
+
+	@Query(value="select a.* from job a where a.type_id=:typeId", nativeQuery = true)
+	List<Job> findJobsByJobTypeId(@Param("typeId") Long typeId);
 }

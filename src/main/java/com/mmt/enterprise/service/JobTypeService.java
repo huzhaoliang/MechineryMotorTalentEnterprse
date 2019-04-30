@@ -11,5 +11,7 @@ public interface JobTypeService {
 	
 	Page<JobType> getJobTypes(int pageNumber, int pageSize);
 	
-	void deleteJobType(List<JobType> jobTypes);
+	void deleteJobTypeById(Long id);
+
+	JobType getJobTypeById(Long id);
 }

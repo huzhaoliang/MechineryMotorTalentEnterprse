@@ -29,8 +29,13 @@ public class JobTypeServiceImpl implements JobTypeService{
 	}
 
 	@Override
-	public void deleteJobType(List<JobType> jobTypes) {
-		jobTypeRepository.deleteInBatch(jobTypes);
+	public void deleteJobTypeById(Long id) {
+		jobTypeRepository.deleteById(id);
+	}
+
+	@Override
+	public JobType getJobTypeById(Long id) {
+		return jobTypeRepository.getOne(id);
 	}
 
 }

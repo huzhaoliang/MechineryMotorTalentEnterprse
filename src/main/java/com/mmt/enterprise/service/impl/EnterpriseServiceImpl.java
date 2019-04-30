@@ -28,4 +28,14 @@ public class EnterpriseServiceImpl implements EnterpriseService{
 		return enterpriseRepository.getEnterpriseByEmailAndPwd(email, password);
 	}
 
+	@Override
+	public EnterpriseUser saveEnterprise(EnterpriseUser user) {
+		return enterpriseRepository.saveAndFlush(user);
+	}
+
+	@Override
+	public EnterpriseUser getEnterpriseUserByName(String name) {
+		return enterpriseRepository.getEnterpriseByName(name);
+	}
+
 }

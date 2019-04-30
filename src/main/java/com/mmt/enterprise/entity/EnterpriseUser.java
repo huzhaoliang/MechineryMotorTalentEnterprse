@@ -22,17 +22,18 @@ public class EnterpriseUser {
 	@GeneratedValue
 	@Column(name = "id", nullable = false)
 	private Long id;
+	@Column(unique=true)
 	private String name;
 	private String password;
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "city_id")
-	private City city;
+	private Long cityId;
 	private String locate;
-	private Clob description;
+	@Column(columnDefinition="TEXT")
+	private String description;
 	private String logoPath;
 	private String contact;
 	private String telephone;
 	private String postCode;
+	@Column(unique=true)
 	private String email;
 	private String webSite;
 	@OneToMany(cascade = CascadeType.ALL)
@@ -66,14 +67,14 @@ public class EnterpriseUser {
 	/**
 	 * @return the city
 	 */
-	public City getCity() {
-		return city;
+	public Long getCityId() {
+		return cityId;
 	}
 	/**
-	 * @param city the city to set
+	 * @param cityId the cityId to set
 	 */
-	public void setCity(City city) {
-		this.city = city;
+	public void setCityId(Long cityId) {
+		this.cityId = cityId;
 	}
 	/**
 	 * @return the locate
@@ -174,13 +175,13 @@ public class EnterpriseUser {
 	/**
 	 * @return the description
 	 */
-	public Clob getDescription() {
+	public String getDescription() {
 		return description;
 	}
 	/**
 	 * @param description the description to set
 	 */
-	public void setDescription(Clob description) {
+	public void setDescription(String description) {
 		this.description = description;
 	}
 	/**

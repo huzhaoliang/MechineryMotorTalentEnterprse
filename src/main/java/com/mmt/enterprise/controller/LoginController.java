@@ -11,7 +11,18 @@ public class LoginController
 {
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
-	
+	@RequestMapping(value="/")
+	public String root() {
+		logger.info("++++++++login action++++++++++");
+		return "enterprise/login";
+	}
+
+	@RequestMapping(value="enterprise/")
+	public String enterprise() {
+		logger.info("++++++++login action++++++++++");
+		return "enterprise/login";
+	}
+
 	@RequestMapping(value="/enterprise/login")
 	public String manageLogin() {
 		logger.info("++++++++login action++++++++++");

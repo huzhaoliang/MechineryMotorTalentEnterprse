@@ -15,7 +15,7 @@ public interface JobService {
 	
 	List<Job> getJobsByCompany(Long companyId);
 	
-	void deleteJobs(List<Job> jobs);
-	
 	void deleteJobById(Long id);
+
+	List<Job> getJobsByType(Long typeId);
 }

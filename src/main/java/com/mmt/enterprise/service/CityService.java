@@ -11,4 +11,6 @@ public interface CityService {
 	List<City> getProvinces();
 
 	List<City> getCitiesByParentId(Long parentId);
+
+	City getCityById(Long id);
 }

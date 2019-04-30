@@ -25,7 +25,9 @@ public class JobType {
 	@Column(name = "id", nullable = false)
 	private Long id;
 	private String type;
-	private Long flag;// 1， 2， 3
+	//
+	private Long flag;// 1， 2
+	//not use currently
 	private Long parentId;
 	private Date updateTime;
 	@OneToMany(cascade = CascadeType.ALL)

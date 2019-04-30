@@ -40,13 +40,13 @@ public class JobServiceImpl implements JobService{
 	}
 
 	@Override
-	public void deleteJobs(List<Job> jobs) {
-		jobRepository.deleteInBatch(jobs);
+	public void deleteJobById(Long id) {
+		jobRepository.deleteById(id);
 	}
 
 	@Override
-	public void deleteJobById(Long id) {
-		jobRepository.deleteJobById(id);
+	public List<Job> getJobsByType(Long typeId) {
+		return jobRepository.findJobsByJobTypeId(typeId);
 	}
 
 }

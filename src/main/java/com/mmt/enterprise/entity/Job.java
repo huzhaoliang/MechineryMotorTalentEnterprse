@@ -39,7 +39,8 @@ public class Job {
 	private Long exp;
 	private String tag;
 	private Date publishTime;
-	private Clob description;
+	@Column(columnDefinition="TEXT")
+	private String description;
 	private String contact;
 	private String contactPhone;
 	private String email;
@@ -198,13 +199,13 @@ public class Job {
 	/**
 	 * @return the description
 	 */
-	public Clob getDescription() {
+	public String getDescription() {
 		return description;
 	}
 	/**
 	 * @param description the description to set
 	 */
-	public void setDescription(Clob description) {
+	public void setDescription(String description) {
 		this.description = description;
 	}
 	/**
