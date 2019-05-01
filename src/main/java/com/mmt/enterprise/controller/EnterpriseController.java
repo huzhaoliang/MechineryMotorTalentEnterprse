@@ -49,8 +49,6 @@ public class EnterpriseController {
 	@RequestMapping(value="/enterprise/enter_save", method=RequestMethod.POST)
 	public String save(@ModelAttribute(value="enterForm") EnterpriseUser enter) {
 		logger.info("++++++++enterprise save++++++++++");
-		//check if there's duplicate email
-
 		enterpriseService.saveEnterprise(enter);
 		return "redirect:enter_info";
 	}

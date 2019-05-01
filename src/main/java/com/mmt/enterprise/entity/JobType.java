@@ -13,8 +13,6 @@ import javax.persistence.Table;
 
 /**
  * 工作类型
- * @author hp
- *
  */
 @Entity
 @Table(name="job_type")

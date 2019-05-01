@@ -1,6 +1,5 @@
 package com.mmt.enterprise.entity;
 
-import java.sql.Clob;
 import java.util.Date;
 import java.util.List;
 

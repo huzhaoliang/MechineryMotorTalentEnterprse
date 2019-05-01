@@ -8,9 +8,7 @@ import com.mmt.enterprise.entity.City;
 
 public interface CityService {
 	
-	List<City> getProvinces();
-
-	List<City> getCitiesByParentId(Long parentId);
+	List<City> getCityByFlag(Long flag);
 
 	City getCityById(Long id);
 }

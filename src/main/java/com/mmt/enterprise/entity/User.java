@@ -16,8 +16,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 /**
  * 个人用户
- * @author hp
- *
  */
 @Entity
 @Table(name="user")

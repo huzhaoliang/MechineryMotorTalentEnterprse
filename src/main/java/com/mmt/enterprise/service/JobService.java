@@ -9,13 +9,13 @@ import com.mmt.enterprise.entity.Job;
 public interface JobService {
 	Job insertJob(Job job);
 	
-	Page<Job> getJobs(int pageNumber, int pageSize);
+	Page<Job> getJobs(Long comId, String name, int pageNumber, int pageSize);
 	
 	List<Job> getAllJobs();
-	
-	List<Job> getJobsByCompany(Long companyId);
 	
 	void deleteJobById(Long id);
 
 	List<Job> getJobsByType(Long typeId);
+
+	Job getJobById(Long id);
 }
