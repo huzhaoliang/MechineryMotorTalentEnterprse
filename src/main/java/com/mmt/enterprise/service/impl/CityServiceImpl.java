@@ -30,4 +30,9 @@ public class CityServiceImpl implements CityService{
 		return cityRepository.getAllCities();
 	}
 
+	@Override
+	public List<City> getSubCityByParentId(Long parentId) {
+		return cityRepository.getSubCityByParentId(parentId);
+	}
+
 }

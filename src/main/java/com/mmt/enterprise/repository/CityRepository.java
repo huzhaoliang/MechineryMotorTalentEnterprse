@@ -15,4 +15,7 @@ public interface CityRepository extends JpaSpecificationExecutor<City>, JpaRepos
 
 	@Query(value="select * from city order by name", nativeQuery = true)
 	List<City> getAllCities();
+
+	@Query(value="select a.* from city a where a.parent_id=:parentId order by a.name", nativeQuery = true)
+	List<City> getSubCityByParentId(@Param("parentId") Long parentId);
 }

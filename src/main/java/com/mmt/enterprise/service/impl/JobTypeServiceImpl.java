@@ -21,4 +21,9 @@ public class JobTypeServiceImpl implements JobTypeService{
 	public List<JobType> getTypesByFlag(int flag) {
 		return jobTypeRepository.getTypesByFlag(flag);
 	}
+
+	@Override
+	public List<JobType> getSubType(Long parentId) {
+		return jobTypeRepository.getSubTypeByParentId(parentId);
+	}
 }

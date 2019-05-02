@@ -33,7 +33,6 @@
         <div class="content-inner chart-cont">
             <!--***** CONTENT *****-->
             <div class="card form" id="form1">
-                <a th:href="@{'/enterprise/job_add'}">新增岗位</a>
                 <form class="form-inline" id="job_form" th:action="@{/enterprise/job_list}" method="get">
                 <label class="mr-sm-2" for="inlineFormCustomSelect">城市：</label>
 				<select class="form-control" name="cityId" style="width:200px;">
@@ -76,6 +75,13 @@
                             <a th:href="@{'/enterprise/job_update?id='+${job.id}}">修改</a>
                         <a th:href="@{'/enterprise/job_delete?id='+${job.id}}">删除</a></td>
                   	</tr>
+                    <tr align="right">
+                        <td colspan="8">
+                            <a th:if="${pageNumber gt 1}" th:href="@{'/enterprise/job_list?pageNumber='+${pageNumber-1}+'&cityId='+${cityId}+'&name='+${name}}">上一页</a>
+                            <span th:text="'第'+${pageNumber}+'页'"></span>
+                            <a th:if="${pageNumber lt totalPages}" th:href="@{'/enterprise/job_list?pageNumber='+${pageNumber+1}+'&cityId='+${cityId}+'&name='+${name}}">下一页</a>
+                        </td>
+                    </tr>
                   </tbody>
                 </table>
             </div>

@@ -13,4 +13,6 @@ public interface CityService {
 	City getCityById(Long id);
 
 	List<City> getAllCities();
+
+	List<City> getSubCityByParentId(Long parentId);
 }

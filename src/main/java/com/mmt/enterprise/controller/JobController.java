@@ -44,7 +44,7 @@ public class JobController {
     @RequestMapping(value="/enterprise/job_list")
     public String list(Model model, @ModelAttribute(value="name") String name,
                        @ModelAttribute(value="cityId") String cityId,
-                       @ModelAttribute(value="pageNumber") String pageNumber) {
+                       @ModelAttribute(value="pageNumber") int pageNumber) {
         System.out.println("++++++++job list++++++++++" + name);
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = "";
@@ -56,14 +56,12 @@ public class JobController {
         logger.info("username is "+ username);
         EnterpriseUser user = enterpriseService.getEnterpriseUserByName(username);
 
-        if("".equals(pageNumber)){
-            pageNumber = "1";
-        }
+        pageNumber = pageNumber < 1?1:pageNumber;
         City city = null;
         if(!"".equals(cityId)){
             city = cityService.getCityById(Long.valueOf(cityId));
         }
-        Page<Job> jobs = jobService.getJobs(user.getId(),city, name, Integer.valueOf(pageNumber), pageSize);
+        Page<Job> jobs = jobService.getJobs(user.getId(),city, name, pageNumber, pageSize);
         if(jobs != null) {
             model.addAttribute("jobs", jobs);
         }
@@ -71,6 +69,7 @@ public class JobController {
         model.addAttribute("cities", cities);
         model.addAttribute("cityId", cityId);
         model.addAttribute("pageNumber", pageNumber);
+        model.addAttribute("totalPages", jobs.getTotalPages());
         model.addAttribute("name", name);
         return "enterprise/job_list";
     }
@@ -82,29 +81,11 @@ public class JobController {
         if(provinces != null) {
             model.addAttribute("provinces", provinces);
         }
-        List<City> cities = cityService.getCityByFlag(2);
-        if(cities != null){
-            model.addAttribute("cities", cities);
-        }
         List<JobType> topTypes = jobTypeService.getTypesByFlag(1);
         if(topTypes != null){
             model.addAttribute("topTypes", topTypes);
         }
-        List<JobType> subTypes = jobTypeService.getTypesByFlag(2);
-        if(subTypes != null){
-            model.addAttribute("subTypes", subTypes);
-        }
         return "enterprise/job_add";
-    }
-
-    @RequestMapping(value="/enterprise/job_view")
-    public String view(Model model, @ModelAttribute(value="id") Long id) {
-        logger.info("++++++++job view++++++++++");
-        Job job = jobService.getJobById(id);
-        if(job != null){
-            model.addAttribute("job", job);
-        }
-        return "enterprise/job_view";
     }
 
     @RequestMapping(value="/enterprise/job_save", method=RequestMethod.POST)
@@ -136,17 +117,30 @@ public class JobController {
         if(provinces != null) {
             model.addAttribute("provinces", provinces);
         }
-        List<City> cities = cityService.getCityByFlag(2);
-        if(cities != null){
-            model.addAttribute("cities", cities);
-        }
         List<JobType> topTypes = jobTypeService.getTypesByFlag(1);
         if(topTypes != null){
             model.addAttribute("topTypes", topTypes);
         }
-        List<JobType> subTypes = jobTypeService.getTypesByFlag(2);
-        if(subTypes != null){
-            model.addAttribute("subTypes", subTypes);
+        if(job.getCity().getParentId() != null){
+            model.addAttribute("provId", job.getCity().getParentId());
+            model.addAttribute("cityId", job.getCity().getId());
+            List<City> cities = cityService.getSubCityByParentId(job.getCity().getParentId());
+            model.addAttribute("cities", cities);
+        }else{
+            model.addAttribute("provId", job.getCity().getId());
+            List<City> cities = cityService.getSubCityByParentId(job.getCity().getId());
+            model.addAttribute("cities", cities);
+        }
+
+        if(job.getJobType().getParentId() != null){
+            model.addAttribute("topTypeId", job.getJobType().getParentId());
+            model.addAttribute("subTypeId", job.getJobType().getId());
+            List<JobType> types = jobTypeService.getSubType(job.getJobType().getParentId());
+            model.addAttribute("subTypes", types);
+        }else{
+            model.addAttribute("topTypeId", job.getJobType().getId());
+            List<JobType> types = jobTypeService.getSubType(job.getJobType().getId());
+            model.addAttribute("subTypes", types);
         }
         return "enterprise/job_update";
     }
