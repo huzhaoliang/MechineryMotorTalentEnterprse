@@ -10,6 +10,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface JobTypeRepository extends JpaRepository<JobType, Long>{
-    @Query(value="select a.* from job a where a.flag=:flag", nativeQuery = true)
-    List<JobType> getTypesByFlag(@Param("flag") Long flag);
+    @Query(value="select a.* from job_type a where a.flag=:flag", nativeQuery = true)
+    List<JobType> getTypesByFlag(@Param("flag") int flag);
 }

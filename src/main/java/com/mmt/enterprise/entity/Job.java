@@ -3,15 +3,7 @@ package com.mmt.enterprise.entity;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="job")
@@ -26,9 +18,11 @@ public class Job {
 	private Long number; 
 	private String startSalary;
 	private String endSalary;
-	private Long cityId;
-	private Long edu;
-	private Long exp;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "city_id")
+	private City city;
+	private String edu;
+	private String exp;
 	private String tag;
 	private Date publishTime;
 	@Column(columnDefinition="TEXT")
@@ -142,39 +136,37 @@ public class Job {
 		this.endSalary = endSalary;
 	}
 	/**
-	 * @return the cityId
+	 * @return the city
 	 */
-	public Long getCityId() {
-		return cityId;
-	}
+	public City getCity() {return city;}
 	/**
-	 * @param cityId the cityId to set
+	 * @param city the city to set
 	 */
-	public void setCityId(Long cityId) {
-		this.cityId = cityId;
+	public void setCity(City city) {
+		this.city = city;
 	}
 	/**
 	 * @return the edu
 	 */
-	public Long getEdu() {
+	public String getEdu() {
 		return edu;
 	}
 	/**
 	 * @param edu the edu to set
 	 */
-	public void setEdu(Long edu) {
+	public void setEdu(String edu) {
 		this.edu = edu;
 	}
 	/**
 	 * @return the exp
 	 */
-	public Long getExp() {
+	public String getExp() {
 		return exp;
 	}
 	/**
 	 * @param exp the exp to set
 	 */
-	public void setExp(Long exp) {
+	public void setExp(String exp) {
 		this.exp = exp;
 	}
 	/**

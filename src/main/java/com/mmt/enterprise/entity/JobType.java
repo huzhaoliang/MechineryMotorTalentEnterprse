@@ -24,7 +24,7 @@ public class JobType {
 	private Long id;
 	private String type;
 	//
-	private Long flag;// 1， 2
+	private Integer flag;// 1， 2
 	//not use currently
 	private Long parentId;
 	private Date updateTime;
@@ -81,13 +81,13 @@ public class JobType {
 	/**
 	 * @return the flag
 	 */
-	public Long getFlag() {
+	public Integer getFlag() {
 		return flag;
 	}
 	/**
 	 * @param flag the flag to set
 	 */
-	public void setFlag(Long flag) {
+	public void setFlag(Integer flag) {
 		this.flag = flag;
 	}
 	/**

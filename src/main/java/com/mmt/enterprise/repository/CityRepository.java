@@ -11,7 +11,7 @@ import com.mmt.enterprise.entity.City;
 
 public interface CityRepository extends JpaSpecificationExecutor<City>, JpaRepository<City, Long> {
 	@Query(value="select a.* from city a where a.flag=:flag", nativeQuery = true)
-	List<City> getTypesByFlag(@Param("flag") Long flag);
+	List<City> getTypesByFlag(@Param("flag") int flag);
 
 	@Query(value="select * from city order by name", nativeQuery = true)
 	List<City> getAllCities();

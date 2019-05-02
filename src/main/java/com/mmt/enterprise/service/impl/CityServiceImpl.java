@@ -16,7 +16,7 @@ public class CityServiceImpl implements CityService{
 	private CityRepository cityRepository;
 
 	@Override
-	public List<City> getCityByFlag(Long flag) {
+	public List<City> getCityByFlag(int flag) {
 		return cityRepository.getTypesByFlag(flag);
 	}
 

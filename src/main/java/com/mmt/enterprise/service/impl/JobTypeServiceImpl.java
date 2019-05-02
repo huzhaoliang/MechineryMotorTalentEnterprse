@@ -9,14 +9,16 @@ import org.springframework.data.domain.Sort;
 import com.mmt.enterprise.entity.JobType;
 import com.mmt.enterprise.repository.JobTypeRepository;
 import com.mmt.enterprise.service.JobTypeService;
+import org.springframework.stereotype.Service;
 
+@Service("JobTypeService")
 public class JobTypeServiceImpl implements JobTypeService{
 
 	@Autowired
 	private JobTypeRepository jobTypeRepository;
 
 	@Override
-	public List<JobType> getTypesByFlag(Long flag) {
+	public List<JobType> getTypesByFlag(int flag) {
 		return jobTypeRepository.getTypesByFlag(flag);
 	}
 }

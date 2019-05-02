@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -74,19 +75,19 @@ public class JobController {
     @RequestMapping(value="/enterprise/job_add")
     public String add(Model model) {
         logger.info("++++++++job add++++++++++");
-        List<City> provinces = cityService.getCityByFlag(1l);
+        List<City> provinces = cityService.getCityByFlag(1);
         if(provinces != null) {
             model.addAttribute("provinces", provinces);
         }
-        List<City> cities = cityService.getCityByFlag(2l);
+        List<City> cities = cityService.getCityByFlag(2);
         if(cities != null){
             model.addAttribute("cities", cities);
         }
-        List<JobType> topTypes = jobTypeService.getTypesByFlag(1l);
+        List<JobType> topTypes = jobTypeService.getTypesByFlag(1);
         if(topTypes != null){
             model.addAttribute("topTypes", topTypes);
         }
-        List<JobType> subTypes = jobTypeService.getTypesByFlag(2l);
+        List<JobType> subTypes = jobTypeService.getTypesByFlag(2);
         if(subTypes != null){
             model.addAttribute("subTypes", subTypes);
         }
@@ -106,6 +107,17 @@ public class JobController {
     @RequestMapping(value="/enterprise/job_save", method=RequestMethod.POST)
     public String save(@ModelAttribute(value="jobForm") Job job) {
         logger.info("++++++++job save++++++++++");
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = "";
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails)principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+        logger.info("username is "+ username);
+        EnterpriseUser user = enterpriseService.getEnterpriseUserByName(username);
+        job.setPublishTime(new Date());
+        job.setComId(user.getId());
         jobService.insertJob(job);
         return "redirect:job_list";
     }
@@ -117,19 +129,19 @@ public class JobController {
         if(job != null) {
             model.addAttribute("job", job);
         }
-        List<City> provinces = cityService.getCityByFlag(1l);
+        List<City> provinces = cityService.getCityByFlag(1);
         if(provinces != null) {
             model.addAttribute("provinces", provinces);
         }
-        List<City> cities = cityService.getCityByFlag(2l);
+        List<City> cities = cityService.getCityByFlag(2);
         if(cities != null){
             model.addAttribute("cities", cities);
         }
-        List<JobType> topTypes = jobTypeService.getTypesByFlag(1l);
+        List<JobType> topTypes = jobTypeService.getTypesByFlag(1);
         if(topTypes != null){
             model.addAttribute("topTypes", topTypes);
         }
-        List<JobType> subTypes = jobTypeService.getTypesByFlag(2l);
+        List<JobType> subTypes = jobTypeService.getTypesByFlag(2);
         if(subTypes != null){
             model.addAttribute("subTypes", subTypes);
         }

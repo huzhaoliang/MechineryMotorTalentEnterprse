@@ -4,5 +4,5 @@ import java.util.List;
 import com.mmt.enterprise.entity.JobType;
 
 public interface JobTypeService {
-	List<JobType> getTypesByFlag(Long flag);
+	List<JobType> getTypesByFlag(int flag);
 }

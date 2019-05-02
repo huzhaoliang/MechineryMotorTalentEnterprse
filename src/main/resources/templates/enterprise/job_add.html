@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="all,follow">
-    <title>企业信息维护</title>
+    <title>新增岗位</title>
     <link rel="shortcut icon" href="/static/img/favicon.ico">
     <!-- global stylesheets -->
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
@@ -43,41 +43,66 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <legend>岗位名称：</legend>
+                                    <legend>名称：</legend>
                                     <input class="form-control" name="name" required/>
                                 </div>
                                 <div class="form-group">
-                                    <legend>名称：</legend>
-                                    <input class="form-control" name="name" th:value="${enter.name}" readonly="readonly"/>
+                                    <legend>人数：</legend>
+                                    <input class="form-control" name="number" required/>
                                 </div>
                                 <div class="form-group">
                                     <legend>城市：</legend>
-                                    <input class="form-control" name="cityName" th:value="${city.name}" readonly="readonly"/>
-                                    <input hidden="hidden" name="cityId" th:value="${enter.cityId}"/>
+                                    <select class="form-control" name="provId" id="provDiv" style="width:150px;">
+                                        <option value="">---选择省份---</option>
+                                        <option th:each="prov,provStat:${provinces}" th:value="${prov.id}" th:text="${prov.name}"></option>
+                                    </select>
+                                    <select class="form-control" name="cityId" id="cityDiv" style="width:150px;">
+                                        <option value="">---选择城市---</option>
+                                        <option th:each="city,cityStat:${cities}" th:value="${city.id}" th:text="${city.name}"></option>
+                                    </select>
                                 </div>
                                 <div class="form-group">
-                                    <legend>地址：</legend>
-                                    <input class="form-control" name="locate" th:value="${enter.locate}"/>
+                                    <legend>类别：</legend>
+                                    <select class="form-control" name="topTypeId" id="topTypeDiv" style="width:150px;">
+                                        <option value="">---父类别---</option>
+                                        <option th:each="ttype,ttypeStat:${topTypes}" th:value="${ttype.id}" th:text="${ttype.type}"></option>
+                                    </select>
+                                    <select class="form-control" name="typeId" id="subTypeDiv" style="width:150px;">
+                                        <option value="">---子类别---</option>
+                                        <option th:each="stype,stypeStat:${subTypes}" th:value="${stype.id}" th:text="${stype.type}"></option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <legend>教育背景：</legend>
+                                    <input class="form-control" name="edu" required/>
+                                </div>
+                                <div class="form-group">
+                                    <legend>经验：</legend>
+                                    <input class="form-control" name="exp" required/>
+                                </div>
+                                <div class="form-group">
+                                    <legend>薪资下限：</legend>
+                                    <input class="form-control" name="startSalary"/>
+                                </div>
+                                <div class="form-group">
+                                    <legend>薪资上限：</legend>
+                                    <input class="form-control" name="endSalary"/>
                                 </div>
                                 <div class="form-group">
                                     <legend>联系人：</legend>
-                                    <input class="form-control" name="contact" th:value="${enter.contact}"/>
+                                    <input class="form-control" name="contact"/>
                                 </div>
                                 <div class="form-group">
                                     <legend>联系电话：</legend>
-                                    <input class="form-control" name="telephone" th:value="${enter.telephone}"/>
+                                    <input class="form-control" name="contactPhone"/>
                                 </div>
                                 <div class="form-group">
-                                    <legend>邮编：</legend>
-                                    <input class="form-control" name="postCode" th:value="${enter.postCode}"/>
+                                    <legend>邮箱：</legend>
+                                    <input class="form-control" name="email"/>
                                 </div>
                                 <div class="form-group">
                                     <legend>描述：</legend>
-                                    <textarea name="description" th:text="${enter.description}" rows="10" cols="100"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <legend>公司网站：</legend>
-                                    <input class="form-control" name="webSite" th:value="${enter.webSite}"/>
+                                    <textarea name="description" rows="10" cols="100"></textarea>
                                 </div>
                             </div>
                         </div>

@@ -28,7 +28,7 @@ public class JobServiceImpl implements JobService{
 
 	@Override
 	public Page<Job> getJobs(Long comId, Long cityId, String name, int pageNumber, int pageSize) {
-		Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
+		Sort sort = new Sort(Sort.Direction.DESC, "publishTime");
 		PageRequest request = PageRequest.of(pageNumber - 1, pageSize, sort);
 		Specification<Job> spec = new Specification<Job>() {
 			public Predicate toPredicate(Root<Job> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
@@ -39,7 +39,7 @@ public class JobServiceImpl implements JobService{
 					Path<String> nameAttribute = root.get("name");
 					Predicate p2 = cb.like(nameAttribute, "%"+name+"%");
 					if(cityId != -1){
-						Path<Long> cityAttribute = root.get("cityId");
+						Path<Long> cityAttribute = root.get("city.id");
 						Predicate p3 = cb.equal(cityAttribute, cityId);
 						p = cb.and(p1, p2, p3);
 					}else{

@@ -18,7 +18,7 @@ public class City {
 	@Column(name = "id", nullable = false)
 	private Long id;
 	private String name;
-	private Integer Flag;//1:一级 xx省 2: 子城市
+	private Integer flag;//1:一级 xx省 2: 子城市
 	private Long parentId;
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<EnterpriseUser> companys;
@@ -50,13 +50,13 @@ public class City {
 	 * @return the flag
 	 */
 	public Integer getFlag() {
-		return Flag;
+		return flag;
 	}
 	/**
 	 * @param flag the flag to set
 	 */
 	public void setFlag(Integer flag) {
-		Flag = flag;
+		flag = flag;
 	}
 
 	/**
