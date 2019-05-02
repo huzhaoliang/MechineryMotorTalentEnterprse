@@ -22,22 +22,22 @@
 <script src="/static/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div th:include="/manage/top"></div>
+<div th:include="/enterprise/top"></div>
 <!--====================================================
                         PAGE CONTENT
 ======================================================-->
     <div class="page-content d-flex align-items-stretch">
 
-       <div th:include="/manage/left"></div>
+       <div th:include="/enterprise/left"></div>
 
         <div class="content-inner chart-cont">
             <!--***** CONTENT *****-->
             <div class="card form" id="form1">
-                <form class="form-inline" id="city_form" th:action="@{/manage/city_list}" method="get">
-                <label class="mr-sm-2" for="inlineFormCustomSelect">省份：</label>
-				<select class="form-control" id="parentId" name="parentId" style="width:200px;">
-				<option value="-1">----------省份-----------</option>
-				<option th:each="city,cityStat:${provs}" th:value="${city.id}" th:text="${city.name}"></option>
+                <form class="form-inline" id="job_form" th:action="@{/enterprise/job_list}" method="get">
+                <label class="mr-sm-2" for="inlineFormCustomSelect">城市：</label>
+				<select class="form-control" name="cityId" style="width:200px;">
+				<option value="-1">----------城市-----------</option>
+				<option th:each="city,cityStat:${cities}" th:value="${city.id}" th:text="${city.name}"></option>
 				</select>
 				&nbsp;&nbsp;&nbsp;&nbsp;
 				<label class="mr-sm-2" for="inlineFormCustomSelect">名称：</label>
@@ -51,17 +51,20 @@
                 <table class="table table-hover">
                   <thead>
                     <tr class="bg-info text-white">
-                      <th>#</th>
-                      <th>类别</th>
-                      <th>城市名称</th>
-                      <th>所属省份</th>
-                      <th>操作</th>
+                        <th>#</th>
+                        <th>名称</th>
+                        <th>城市</th>
+                        <th>类别</th>
+                        <th>教育</th>
+                        <th>经验</th>
+                        <th>薪资</th>
+                        <th>操作</th>
                     </tr>
                   </thead>
                   <tbody>
-                  	<tr th:each="city,cityStat:${citys}">
-                  	<th scope="row" th:text="${cityStat.index+1}"></th>
-                  	<td th:if="${city.flag == 1}" th:text="一级城市"></td>
+                  	<tr th:each="job,jobStat:${jobs}">
+                  	<th scope="row" th:text="${jobStat.index+1}"></th>
+                  	<td th:if="${job.flag == 1}" th:text="一级城市"></td>
                   	<td th:if="${city.flag != 1}" th:text="二级城市"></td>
                     <td th:text="${city.name}"></td>
                     <td th:if="${city.parentId}" th:text="${provinces[city.parentId]}"></td>

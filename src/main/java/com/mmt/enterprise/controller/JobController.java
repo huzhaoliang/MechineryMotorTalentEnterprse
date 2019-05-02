@@ -42,7 +42,8 @@ public class JobController {
 
     @RequestMapping(value="/enterprise/job_list")
     public String list(Model model, @ModelAttribute(value="name") String name,
-                       @ModelAttribute(value="pageNumber") int pageNumber) {
+                       @ModelAttribute(value="cityId") String cityId,
+                       @ModelAttribute(value="pageNumber") String pageNumber) {
         System.out.println("++++++++job list++++++++++" + name);
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = "";
@@ -53,11 +54,18 @@ public class JobController {
         }
         logger.info("username is "+ username);
         EnterpriseUser user = enterpriseService.getEnterpriseUserByName(username);
-        Page<Job> jobs = jobService.getJobs(user.getId(), name, pageNumber, pageSize);
-        jobs.getTotalPages();
+        if("".equals(cityId)){
+            cityId = "-1";
+        }
+        if("".equals(pageNumber)){
+            pageNumber = "1";
+        }
+        Page<Job> jobs = jobService.getJobs(user.getId(),Long.valueOf(cityId), name, Integer.valueOf(pageNumber), pageSize);
         if(jobs != null) {
             model.addAttribute("jobs", jobs);
         }
+        List<City> cities = cityService.getAllCities();
+        model.addAttribute("cities", cities);
         model.addAttribute("pageNumber", pageNumber);
         model.addAttribute("name", name);
         return "enterprise/job_list";

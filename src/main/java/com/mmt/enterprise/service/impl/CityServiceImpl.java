@@ -16,18 +16,18 @@ public class CityServiceImpl implements CityService{
 	private CityRepository cityRepository;
 
 	@Override
-	public List<City> getProvinces() {
-		return cityRepository.findProvinces();
-	}
-
-	@Override
-	public List<City> getCitiesByParentId(Long parentId) {
-		return cityRepository.getCitiesByParentId(parentId);
+	public List<City> getCityByFlag(Long flag) {
+		return cityRepository.getTypesByFlag(flag);
 	}
 
 	@Override
 	public City getCityById(Long id) {
 		return cityRepository.getOne(id);
+	}
+
+	@Override
+	public List<City> getAllCities() {
+		return cityRepository.getAllCities();
 	}
 
 }

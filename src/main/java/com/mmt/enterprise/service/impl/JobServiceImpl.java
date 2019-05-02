@@ -27,20 +27,32 @@ public class JobServiceImpl implements JobService{
 	}
 
 	@Override
-	public Page<Job> getJobs(Long comId, String name, int pageNumber, int pageSize) {
+	public Page<Job> getJobs(Long comId, Long cityId, String name, int pageNumber, int pageSize) {
 		Sort sort = new Sort(Sort.Direction.DESC, "updateTime");
 		PageRequest request = PageRequest.of(pageNumber - 1, pageSize, sort);
 		Specification<Job> spec = new Specification<Job>() {
 			public Predicate toPredicate(Root<Job> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 				Predicate p = null;
-				Path<String> comAttribute = root.get("company.id");
+				Path<Long> comAttribute = root.get("comId");
 				Predicate p1 = cb.equal(comAttribute, comId);
-				if(!"".equals(name)){
+				if(!"".equals(name) ){
 					Path<String> nameAttribute = root.get("name");
 					Predicate p2 = cb.like(nameAttribute, "%"+name+"%");
-					p = cb.and(p1, p2);
+					if(cityId != -1){
+						Path<Long> cityAttribute = root.get("cityId");
+						Predicate p3 = cb.equal(cityAttribute, cityId);
+						p = cb.and(p1, p2, p3);
+					}else{
+						p = cb.and(p1, p2);
+					}
 				}else{
-					p = cb.and(p1);
+					if(cityId != -1){
+						Path<Long> cityAttribute = root.get("cityId");
+						Predicate p3 = cb.equal(cityAttribute, cityId);
+						p = cb.and(p1, p3);
+					}else{
+						p = cb.and(p1);
+					}
 				}
 				return p;
 			}

@@ -9,7 +9,7 @@ import com.mmt.enterprise.entity.Job;
 public interface JobService {
 	Job insertJob(Job job);
 	
-	Page<Job> getJobs(Long comId, String name, int pageNumber, int pageSize);
+	Page<Job> getJobs(Long comId, Long cityId, String name, int pageNumber, int pageSize);
 	
 	List<Job> getAllJobs();
 	

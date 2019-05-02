@@ -10,9 +10,9 @@ import org.springframework.data.repository.query.Param;
 import com.mmt.enterprise.entity.City;
 
 public interface CityRepository extends JpaSpecificationExecutor<City>, JpaRepository<City, Long> {
-	@Query(value="select a.* from city a where a.flag=1", nativeQuery = true)
-	List<City> findProvinces();
+	@Query(value="select a.* from city a where a.flag=:flag", nativeQuery = true)
+	List<City> getTypesByFlag(@Param("flag") Long flag);
 
-	@Query(value="select a.* from city a where a.parent_id=:parentId", nativeQuery = true)
-	List<City> getCitiesByParentId(@Param("parentId") Long parentId);
+	@Query(value="select * from city order by name", nativeQuery = true)
+	List<City> getAllCities();
 }

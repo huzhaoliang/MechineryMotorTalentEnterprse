@@ -11,4 +11,6 @@ public interface CityService {
 	List<City> getCityByFlag(Long flag);
 
 	City getCityById(Long id);
+
+	List<City> getAllCities();
 }

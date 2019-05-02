@@ -6,13 +6,11 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -23,17 +21,12 @@ public class Job {
 	@Column(name = "id", nullable = false)
 	private Long id;
 	private String name;
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "type_id")
-	private JobType jobType;//job type
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "com_id")
-	private EnterpriseUser company;
+	private Long typeId;//job type
+	private Long comId;
 	private Long number; 
-	private String salary;
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "city_id")
-	private City city;
+	private String startSalary;
+	private String endSalary;
+	private Long cityId;
 	private Long edu;
 	private Long exp;
 	private String tag;
@@ -88,28 +81,28 @@ public class Job {
 		this.name = name;
 	}
 	/**
-	 * @return the jobType
+	 * @return the typeId
 	 */
-	public JobType getJobType() {
-		return jobType;
+	public Long getTypeId() {
+		return typeId;
 	}
 	/**
-	 * @param jobType the jobType to set
+	 * @param typeId the typeId to set
 	 */
-	public void setJobType(JobType jobType) {
-		this.jobType = jobType;
+	public void setTypeId(Long typeId) {
+		this.typeId = typeId;
 	}
 	/**
-	 * @return the company
+	 * @return the comId
 	 */
-	public EnterpriseUser getCompany() {
-		return company;
+	public Long getComId() {
+		return comId;
 	}
 	/**
-	 * @param company the company to set
+	 * @param comId the comId to set
 	 */
-	public void setCompany(EnterpriseUser company) {
-		this.company = company;
+	public void setComId(Long comId) {
+		this.comId = comId;
 	}
 	/**
 	 * @return the number
@@ -124,28 +117,41 @@ public class Job {
 		this.number = number;
 	}
 	/**
-	 * @return the salary
+	 * @return the startSalary
 	 */
-	public String getSalary() {
-		return salary;
+	public String getStartSalary() {
+		return startSalary;
 	}
 	/**
-	 * @param salary the salary to set
+	 * @param startSalary the startSalary to set
 	 */
-	public void setSalary(String salary) {
-		this.salary = salary;
+	public void setStartSalary(String startSalary) {
+		this.startSalary = startSalary;
+	}
+
+	/**
+	 * @return the endSalary
+	 */
+	public String getEndSalary() {
+		return endSalary;
 	}
 	/**
-	 * @return the city
+	 * @param endSalary the endSalary to set
 	 */
-	public City getCity() {
-		return city;
+	public void setEndSalary(String endSalary) {
+		this.endSalary = endSalary;
 	}
 	/**
-	 * @param city the city to set
+	 * @return the cityId
 	 */
-	public void setCity(City city) {
-		this.city = city;
+	public Long getCityId() {
+		return cityId;
+	}
+	/**
+	 * @param cityId the cityId to set
+	 */
+	public void setCityId(Long cityId) {
+		this.cityId = cityId;
 	}
 	/**
 	 * @return the edu
