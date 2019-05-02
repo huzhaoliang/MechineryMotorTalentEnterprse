@@ -37,8 +37,9 @@
                 <form class="form-inline" id="job_form" th:action="@{/enterprise/job_list}" method="get">
                 <label class="mr-sm-2" for="inlineFormCustomSelect">城市：</label>
 				<select class="form-control" name="cityId" style="width:200px;">
-				<option value="-1">----------城市-----------</option>
-				<option th:each="city,cityStat:${cities}" th:value="${city.id}" th:text="${city.name}"></option>
+				    <option value="">----------城市-----------</option>
+				    <option th:each="city,cityStat:${cities}" th:value="${city.id}" th:text="${city.name}" th:if="${city.id eq cityId}" th:selected="selected"></option>
+                    <option th:each="city,cityStat:${cities}" th:value="${city.id}" th:text="${city.name}" th:if="${city.id ne cityId}"></option>
 				</select>
 				&nbsp;&nbsp;&nbsp;&nbsp;
 				<label class="mr-sm-2" for="inlineFormCustomSelect">名称：</label>
@@ -67,10 +68,10 @@
                   	    <th scope="row" th:text="${jobStat.index+1}"></th>
                         <td th:text="${job.name}"></td>
                         <td th:text="${job.city.name}"></td>
-                        <td th:text="${job.typeId}"></td>
+                        <td th:text="${job.jobType.type}"></td>
                         <td th:text="${job.edu}"></td>
                         <td th:text="${job.exp}"></td>
-                        <td th:text="${job.startSalary}--${job.endSalary}}"></td>
+                        <td th:text="${job.startSalary + '--' + job.endSalary}"></td>
                         <td>
                             <a th:href="@{'/enterprise/job_update?id='+${job.id}}">修改</a>
                         <a th:href="@{'/enterprise/job_delete?id='+${job.id}}">删除</a></td>

@@ -55,18 +55,21 @@ public class JobController {
         }
         logger.info("username is "+ username);
         EnterpriseUser user = enterpriseService.getEnterpriseUserByName(username);
-        if("".equals(cityId)){
-            cityId = "-1";
-        }
+
         if("".equals(pageNumber)){
             pageNumber = "1";
         }
-        Page<Job> jobs = jobService.getJobs(user.getId(),Long.valueOf(cityId), name, Integer.valueOf(pageNumber), pageSize);
+        City city = null;
+        if(!"".equals(cityId)){
+            city = cityService.getCityById(Long.valueOf(cityId));
+        }
+        Page<Job> jobs = jobService.getJobs(user.getId(),city, name, Integer.valueOf(pageNumber), pageSize);
         if(jobs != null) {
             model.addAttribute("jobs", jobs);
         }
         List<City> cities = cityService.getAllCities();
         model.addAttribute("cities", cities);
+        model.addAttribute("cityId", cityId);
         model.addAttribute("pageNumber", pageNumber);
         model.addAttribute("name", name);
         return "enterprise/job_list";

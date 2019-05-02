@@ -2,6 +2,7 @@ package com.mmt.enterprise.service;
 
 import java.util.List;
 
+import com.mmt.enterprise.entity.City;
 import org.springframework.data.domain.Page;
 
 import com.mmt.enterprise.entity.Job;
@@ -9,7 +10,7 @@ import com.mmt.enterprise.entity.Job;
 public interface JobService {
 	Job insertJob(Job job);
 	
-	Page<Job> getJobs(Long comId, Long cityId, String name, int pageNumber, int pageSize);
+	Page<Job> getJobs(Long comId, City city, String name, int pageNumber, int pageSize);
 	
 	List<Job> getAllJobs();
 	

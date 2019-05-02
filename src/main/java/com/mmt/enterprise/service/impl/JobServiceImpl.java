@@ -2,6 +2,7 @@ package com.mmt.enterprise.service.impl;
 
 import java.util.List;
 
+import com.mmt.enterprise.entity.City;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -27,7 +28,7 @@ public class JobServiceImpl implements JobService{
 	}
 
 	@Override
-	public Page<Job> getJobs(Long comId, Long cityId, String name, int pageNumber, int pageSize) {
+	public Page<Job> getJobs(Long comId, City city, String name, int pageNumber, int pageSize) {
 		Sort sort = new Sort(Sort.Direction.DESC, "publishTime");
 		PageRequest request = PageRequest.of(pageNumber - 1, pageSize, sort);
 		Specification<Job> spec = new Specification<Job>() {
@@ -38,17 +39,17 @@ public class JobServiceImpl implements JobService{
 				if(!"".equals(name) ){
 					Path<String> nameAttribute = root.get("name");
 					Predicate p2 = cb.like(nameAttribute, "%"+name+"%");
-					if(cityId != -1){
-						Path<Long> cityAttribute = root.get("city.id");
-						Predicate p3 = cb.equal(cityAttribute, cityId);
+					if(city != null){
+						Path<City> cityAttribute = root.get("city");
+						Predicate p3 = cb.equal(cityAttribute, city);
 						p = cb.and(p1, p2, p3);
 					}else{
 						p = cb.and(p1, p2);
 					}
 				}else{
-					if(cityId != -1){
-						Path<Long> cityAttribute = root.get("cityId");
-						Predicate p3 = cb.equal(cityAttribute, cityId);
+					if(city != null){
+						Path<City> cityAttribute = root.get("city");
+						Predicate p3 = cb.equal(cityAttribute, city);
 						p = cb.and(p1, p3);
 					}else{
 						p = cb.and(p1);

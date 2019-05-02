@@ -13,7 +13,9 @@ public class Job {
 	@Column(name = "id", nullable = false)
 	private Long id;
 	private String name;
-	private Long typeId;//job type
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "type_id")
+	private JobType jobType;
 	private Long comId;
 	private Long number; 
 	private String startSalary;
@@ -75,16 +77,16 @@ public class Job {
 		this.name = name;
 	}
 	/**
-	 * @return the typeId
+	 * @return the jobType
 	 */
-	public Long getTypeId() {
-		return typeId;
+	public JobType getJobType() {
+		return jobType;
 	}
 	/**
-	 * @param typeId the typeId to set
+	 * @param jobType the jobType to set
 	 */
-	public void setTypeId(Long typeId) {
-		this.typeId = typeId;
+	public void setJobType(JobType jobType) {
+		this.jobType = jobType;
 	}
 	/**
 	 * @return the comId
