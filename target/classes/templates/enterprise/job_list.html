@@ -44,6 +44,7 @@
 				<label class="mr-sm-2" for="inlineFormCustomSelect">名称：</label>
 				 <div class="form-check mb-2 mr-sm-2 mb-sm-0">
 					<input class="form-control" type="text" name="name" id="name" th:value="${name}" style="width:200px;"/>
+                     <input class="form-control" type="hidden" name="pageNumber" th:value="1"/>
 				</div> 
 				<button type="submit" class="btn btn-general btn-blue mr-2">查询</button> 
                 </form>  

@@ -103,7 +103,7 @@ public class JobController {
         job.setPublishTime(new Date());
         job.setComId(user.getId());
         jobService.insertJob(job);
-        return "redirect:job_list";
+        return "redirect:job_list?pageNumber=1";
     }
 
     @RequestMapping(value="/enterprise/job_update")
@@ -149,6 +149,6 @@ public class JobController {
     public String delete(Model model, @ModelAttribute(value="id") Long id) {
         logger.info("++++++++job delete++++++++++"+id);
         jobService.deleteJobById(id);
-        return "redirect:job_list";
+        return "redirect:job_list?pageNumber=1";
     }
 }
