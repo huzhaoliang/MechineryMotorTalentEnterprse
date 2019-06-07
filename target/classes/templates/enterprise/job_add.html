@@ -52,23 +52,31 @@
                                 </div>
                                 <div class="form-group">
                                     <legend><span style="color:red;">*</span>城市：</legend>
-                                    <select class="form-control" name="provId" id="provDiv" style="width:150px;" onchange="changeProv(this.value);">
-                                        <option value="">---选择省份---</option>
+                                    <select class="form-control" name="provId" id="areaDiv" style="width:150px;" onchange="changeArea(this.value);">
+                                        <option value="">---选择地区---</option>
                                         <option th:each="prov,provStat:${provinces}" th:value="${prov.id}" th:text="${prov.name}"></option>
                                     </select>
-                                    <select class="form-control" name="cityId" id="cityDiv" style="width:150px;" onchange="changeCity(this.value);">
-                                        <option value="">---选择城市---</option>
+                                    <select class="form-control" name="cityId" id="provDiv" style="width:150px;" onchange="changeProvince(this.value);">
+                                        <option value="">---选择省份---</option>
                                     </select>
+                                    
+                                    <select class="form-control" name="cityId" id="cityDiv" style="width:150px;" onchange="changeCity(this.value);">
+                                        <option value="">---选择县市---</option>
+                                    </select>
+                                    
                                     <input class="form-control" id="cityId" name="city.id" hidden required/>
                                 </div>
                                 <div class="form-group">
                                     <legend><span style="color:red;">*</span>类别：</legend>
                                     <select class="form-control" name="topTypeId" id="topTypeDiv" style="width:150px;" onchange="changeTopType(this.value);">
-                                        <option value="">---父类别---</option>
+                                        <option value="">---一级类别---</option>
                                         <option th:each="ttype,ttypeStat:${topTypes}" th:value="${ttype.id}" th:text="${ttype.type}"></option>
                                     </select>
-                                    <select class="form-control" name="typeId" id="subTypeDiv" style="width:150px;" onchange="changeSubType(this.value);">
-                                        <option value="">---子类别---</option>
+                                    <select class="form-control" name="subTypeId" id="subTypeDiv" style="width:150px;" onchange="changeSubType(this.value);">
+                                        <option value="">---二级类别---</option>
+                                    </select>
+                                    <select class="form-control" name="typeId" id="thirdTypeDiv" style="width:150px;" onchange="changeThirdType(this.value);">
+                                        <option value="">---三级类别---</option>
                                     </select>
                                     <input class="form-control" id="typeId" name="jobType.id" hidden required/>
                                 </div>
@@ -125,7 +133,20 @@
 <script src="/static/js/chart.min.js"></script>
 <script src="/static/js/front.js"></script>
 <script type="text/javascript">
-    function changeProv(prov){
+    function changeArea(area){
+        document.getElementById("cityId").value=area;
+        $.ajax({
+            type: "get",
+            async: false,
+            url: "/enterprise/sub_city",
+            data: {parentId: area},
+            success: function(result){
+                $('#provDiv').html(result);
+            }
+        });
+    }
+
+    function changeProvince(prov){
         document.getElementById("cityId").value=prov;
         $.ajax({
             type: "get",
@@ -137,9 +158,9 @@
             }
         });
     }
-
-    function changeCity(city){
-        document.getElementById("cityId").value=city;
+    
+    function changeCity(city) {
+    	document.getElementById("cityId").value=city;
     }
 
     function changeTopType(topType){
@@ -157,6 +178,19 @@
 
     function changeSubType(subType){
         document.getElementById("typeId").value=subType;
+        $.ajax({
+            type: "get",
+            async: false,
+            url: "/enterprise/sub_type",
+            data: {parentId: subType},
+            success: function(result){
+                $('#thirdTypeDiv').html(result);
+            }
+        });
+    }
+    
+    function changeThirdType(thirdType){
+        document.getElementById("typeId").value=thirdType;
     }
 </script>
 </body>
