@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="all,follow">
+<title>审核材料</title>
+<link rel="shortcut icon" href="/static/img/favicon.ico">
+<!-- global stylesheets -->
+<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/bootstrap.min.css">
+<link rel="stylesheet" href="/static/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/static/css/font-icon-style.css">
+<link rel="stylesheet" href="/static/css/style.default.css" id="theme-stylesheet">
+
+<!-- Core stylesheets -->
+<link rel="stylesheet" href="/static/css/pages/login.css">
+
+<script src="/static/js/jquery-3.3.1.min.js" type="text/javascript"></script>
+<script src="/static/js/tether.min.js" type="text/javascript"></script>
+<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div th:include="/enterprise/top"></div>
+<!--====================================================
+                        PAGE CONTENT
+======================================================-->
+    <div class="page-content d-flex align-items-stretch">
+
+       <div th:include="/enterprise/left"></div>
+		<div class="content-inner form-cont">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <!--***** BASIC FORM *****-->
+                    <div class="card form" id="form1">
+                    	<div class="card-header">
+                            <h3>审核材料</h3>
+                        </div>
+                        <br/>
+                        <form id="enter_form" th:action="@{/enterprise/enter_submit}" th:object="${submitForm}" method="post" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <legend>名称：</legend>
+                                        <input class="form-control" name="name" th:value="${enter.name}" readonly="readonly"/>
+                                        <input type="hidden" name="id" th:value="${enter.id}"/>
+                                        <input type="hidden" name="password" th:value="${enter.password}"/>
+                                        <input type="hidden" name="email" th:value="${enter.email}"/>
+                                        <input type="hidden" name="cityId" th:value="${enter.cityId}"/>
+                                        <input type="hidden" name="locate" th:value="${enter.locate}"/>
+                                        <input type="hidden" name="description" th:value="${enter.description}"/>
+                                        <input type="hidden" name="logoPath" th:value="${enter.logoPath}"/>
+                                        <input type="hidden" name="contact" th:value="${enter.contact}"/>
+                                        <input type="hidden" name="telephone" th:value="${enter.telephone}"/>
+                                        <input type="hidden" name="postCode" th:value="${enter.postCode}"/>
+                                        <input type="hidden" name="webSite" th:value="${enter.webSite}"/>
+                                        <input type="hidden" name="status" th:value="${enter.status}"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <legend>法人姓名：</legend>
+                                        <input class="form-control" name="legalPerson" th:value="${enter.legalPerson}" required/>
+                                    </div>
+                                    <div class="form-group">
+                                        <legend>法人身份证：</legend>
+                                        <input class="form-control" name="legalPersonId" th:value="${enter.legalPersonId}" required/>
+                                    </div>
+                                    <div class="form-group">
+                                        <legend>社会统一信用代码：</legend>
+                                        <input class="form-control" name="creditCode" th:value="${enter.creditCode}" required/>
+                                    </div>
+                                    <div class="form-group">
+                                        <legend>营业执照：</legend>
+                                        <input type="image" th:value="${enter.license}"/>
+                                        <input type="file" class="form-control" name="file" required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-general btn-blue mr-2">提交</button>  
+                            <button type="button" class="btn btn-general btn-white" onclick="javascript:history.back();">返回</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Global Javascript -->
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/popper/popper.min.js"></script>
+    <script src="/static/js/tether.min.js"></script>
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/static/js/jquery.cookie.js"></script>
+    <script src="/static/js/jquery.validate.min.js"></script> 
+    <script src="/static/js/chart.min.js"></script> 
+    <script src="/static/js/front.js"></script>
+</body>
+
+</html>

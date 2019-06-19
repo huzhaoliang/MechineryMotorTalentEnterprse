@@ -39,6 +39,14 @@ public class EnterpriseUser {
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Job> jobs;
 	private Long status;// 0:待审核 1:审核通过
+	//法人
+	private String legalPerson;
+	//法人身份证号
+	private String legalPersonId;
+	//社会统一信用代码
+	private String creditCode;
+	//营业执照
+	private String license;
 	/**
 	 * @return the id
 	 */
@@ -207,5 +215,37 @@ public class EnterpriseUser {
 	 */
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getLegalPerson() {
+		return legalPerson;
+	}
+
+	public void setLegalPerson(String legalPerson) {
+		this.legalPerson = legalPerson;
+	}
+
+	public String getLegalPersonId() {
+		return legalPersonId;
+	}
+
+	public void setLegalPersonId(String legalPersonId) {
+		this.legalPersonId = legalPersonId;
+	}
+
+	public String getCreditCode() {
+		return creditCode;
+	}
+
+	public void setCreditCode(String creditCode) {
+		this.creditCode = creditCode;
+	}
+
+	public String getLicense() {
+		return license;
+	}
+
+	public void setLicense(String license) {
+		this.license = license;
 	}
 }
