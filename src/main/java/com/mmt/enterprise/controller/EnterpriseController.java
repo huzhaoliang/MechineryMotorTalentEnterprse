@@ -82,7 +82,7 @@ public class EnterpriseController {
 	@RequestMapping(value="/enterprise/enter_submit", method=RequestMethod.POST)
 	public String submit(@ModelAttribute(value="submitForm") EnterpriseUser enter, @RequestParam("file") MultipartFile file) {
 		logger.info("++++++++enterprise material submit++++++++++");
-		String licensePath = "/"+ config.getLicensePath();
+		String licensePath = config.getLicensePath();
 		File dir = new File(licensePath);
 		if(!dir.exists()){
 			dir.mkdir();
@@ -104,6 +104,7 @@ public class EnterpriseController {
 			e.printStackTrace();
 		}
 		enter.setLicense(licensePath);
+		enter.setStatus(1l);//未审核状态
 		enterpriseService.saveEnterprise(enter);
 		return "redirect:enter_material";
 	}

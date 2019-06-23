@@ -38,7 +38,7 @@ public class EnterpriseUser {
 	private String webSite;
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Job> jobs;
-	private Long status;// 0:待审核 1:审核通过
+	private Long status;// // 1:待审核 0:审核通过 2：审核未通过
 	//法人
 	private String legalPerson;
 	//法人身份证号
